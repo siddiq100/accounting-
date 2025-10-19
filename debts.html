@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>💠 المحاسب العبقري | المديونيات</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <h1>💠 المحاسب العبقري | المديونيات</h1>
+        <a href="../dashboard.html">العودة للوحة التحكم</a>
+    </header>
+    <main>
+        <h2>إدارة المديونيات</h2>
+        <form id="addDebtForm">
+            <select id="clientSelect" required>
+                <option value="">اختر العميل</option>
+            </select>
+            <input type="number" id="debtAmount" placeholder="المبلغ" required>
+            <input type="text" id="debtDescription" placeholder="الوصف">
+            <button type="submit">إضافة مديونية</button>
+        </form>
+        <table id="debtsTable" border="1">
+            <thead>
+                <tr>
+                    <th>الرقم</th>
+                    <th>العميل</th>
+                    <th>المبلغ</th>
+                    <th>الوصف</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <p>إجمالي المديونيات: <span id="totalDebts">0</span></p>
+    </main>
+    <script src="../js/debts.js"></script>
+</body>
+</html>

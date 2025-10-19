@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>💠 المحاسب العبقري | الفواتير</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <h1>💠 المحاسب العبقري | الفواتير</h1>
+        <a href="../dashboard.html">العودة للوحة التحكم</a>
+    </header>
+    <main>
+        <h2>إدارة الفواتير</h2>
+        <form id="addInvoiceForm">
+            <select id="clientSelect" required>
+                <option value="">اختر العميل</option>
+            </select>
+            <input type="date" id="invoiceDate" required>
+            <input type="number" id="invoiceTotal" placeholder="إجمالي الفاتورة" required>
+            <input type="number" id="invoicePaid" placeholder="المدفوع (اختياري)">
+            <button type="submit">إضافة فاتورة</button>
+        </form>
+        <table id="invoicesTable" border="1">
+            <thead>
+                <tr>
+                    <th>الرقم</th>
+                    <th>العميل</th>
+                    <th>التاريخ</th>
+                    <th>الإجمالي</th>
+                    <th>المدفوع</th>
+                    <th>المتبقي</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </main>
+    <script src="../js/invoices.js"></script>
+</body>
+</html>

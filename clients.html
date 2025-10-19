@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>💠 المحاسب العبقري | العملاء</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <h1>💠 المحاسب العبقري | العملاء</h1>
+        <a href="../dashboard.html">العودة للوحة التحكم</a>
+    </header>
+    <main>
+        <h2>إدارة العملاء</h2>
+        <form id="addClientForm">
+            <input type="text" id="clientName" placeholder="اسم العميل" required>
+            <input type="text" id="clientPhone" placeholder="رقم الهاتف">
+            <input type="email" id="clientEmail" placeholder="البريد الإلكتروني">
+            <button type="submit">إضافة عميل</button>
+        </form>
+        <table id="clientsTable" border="1">
+            <thead>
+                <tr>
+                    <th>الرقم</th>
+                    <th>الاسم</th>
+                    <th>الهاتف</th>
+                    <th>البريد</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </main>
+    <script src="../js/clients.js"></script>
+</body>
+</html>
