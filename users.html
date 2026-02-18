@@ -1,9 +1,221 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>💠 المحاسب العبقري | المستخدمون</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💠 المحاسب العبقري | إدارة المستخدمين</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        .users-container {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .users-panel {
+            flex: 1;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .add-user-form {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #2f3640;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group select {
+            padding: 10px;
+            border: 1px solid #dfe6e9;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .users-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .users-table thead {
+            background-color: #667eea;
+            color: white;
+        }
+
+        .users-table th,
+        .users-table td {
+            padding: 12px;
+            text-align: right;
+            border-bottom: 1px solid #dfe6e9;
+        }
+
+        .users-table tbody tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        .status {
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status.active {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .status.inactive {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .status.pending {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .role-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .role-badge.admin {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        .role-badge.accountant {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .role-badge.viewer {
+            background-color: #95a5a6;
+            color: white;
+        }
+
+        .role-badge.user {
+            background-color: #27ae60;
+            color: white;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s;
+        }
+
+        .btn-edit {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .btn-approve {
+            background-color: #27ae60;
+            color: white;
+        }
+
+        .btn-toggle {
+            background-color: #f39c12;
+            color: white;
+        }
+
+        .btn-delete {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        .btn-primary {
+            background-color: #667eea;
+            color: white;
+            padding: 10px 20px;
+            margin-top: 15px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 600px;
+            width: 90%;
+        }
+
+        .alert {
+            padding: 12px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+        .alert.success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .alert.error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+    </style>
 </head>
 <body>
     <div class="dashboard">
@@ -14,41 +226,115 @@
             </div>
             <nav>
                 <a href="dashboard.html">🏠 لوحة التحكم</a>
+                <a href="users.html" style="background-color: rgba(255,255,255,0.3);">👥 إدارة المستخدمين</a>
                 <a href="sales.html">💰 المبيعات</a>
-                <a href="purchases.html">🛒 المشتريات</a>
-                <a href="inventory.html">📦 المخزون</a>
-                <a href="clients.html">👥 العملاء</a>
-                <a href="suppliers.html">🏭 الموردون</a>
-                <a href="accounts.html">📊 الحسابات</a>
-                <a href="reports.html">📈 التقارير</a>
                 <a href="settings.html">⚙️ الإعدادات</a>
-                <a href="users.html">👤 المستخدمون</a>
+                <a href="#" onclick="logout()">🚪 تسجيل الخروج</a>
             </nav>
         </aside>
+
         <main class="main-content">
             <header class="top-header">
-                <h2>إدارة المستخدمين</h2>
+                <h2>👥 إدارة المستخدمين</h2>
             </header>
-            <form id="addUserForm">
-                <input type="text" id="userUsername" placeholder="اسم المستخدم" required>
-                <input type="email" id="userEmail" placeholder="البريد الإلكتروني" required>
-                <input type="password" id="userPassword" placeholder="كلمة المرور" required>
-                <button type="submit">إضافة مستخدم</button>
-            </form>
-            <table id="usersTable" border="1">
-                <thead>
-                    <tr>
-                        <th>الرقم</th>
-                        <th>اسم المستخدم</th>
-                        <th>البريد</th>
-                        <th>الحالة</th>
-                        <th>الإجراءات</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
+
+            <div class="users-container">
+                <div class="users-panel">
+                    <!-- نموذج إضافة مستخدم -->
+                    <div class="add-user-form">
+                        <h3 style="margin-bottom: 15px;">➕ إضافة مستخدم جديد</h3>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>اسم المستخدم</label>
+                                <input type="text" id="newUsername" placeholder="أدخل اسم المستخدم">
+                            </div>
+                            <div class="form-group">
+                                <label>الاسم الكامل</label>
+                                <input type="text" id="newFullName" placeholder="أدخل الاسم الكامل">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>البريد الإلكتروني</label>
+                                <input type="email" id="newEmail" placeholder="أدخل البريد الإلكتروني">
+                            </div>
+                            <div class="form-group">
+                                <label>كلمة المرور</label>
+                                <input type="password" id="newPassword" placeholder="أدخل كلمة المرور">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>الدور</label>
+                                <select id="newRole">
+                                    <option value="user">مستخدم عادي</option>
+                                    <option value="accountant">محاسب</option>
+                                    <option value="viewer">عارض</option>
+                                    <option value="admin">مسؤول</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary" onclick="addNewUser()">✅ إضافة المستخدم</button>
+                    </div>
+
+                    <!-- جدول المستخدمين -->
+                    <h3 style="margin: 20px 0;">📋 قائمة المستخدمين</h3>
+                    <table class="users-table">
+                        <thead>
+                            <tr>
+                                <th>الاسم</th>
+                                <th>اسم المستخدم</th>
+                                <th>الدور</th>
+                                <th>الحالة</th>
+                                <th>الإجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersTableBody">
+                            <tr>
+                                <td colspan="5" style="text-align: center; color: #999;">جاري التحميل...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </main>
     </div>
+
+    <!-- نموذج تعديل المستخدم -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <h3>تعديل المستخدم</h3>
+            <div id="editAlert"></div>
+            
+            <div class="form-group">
+                <label>الاسم الكامل</label>
+                <input type="text" id="editFullName">
+            </div>
+
+            <div class="form-group">
+                <label>البريد الالكتروني</label>
+                <input type="email" id="editEmail">
+            </div>
+
+            <div class="form-group">
+                <label>الدور</label>
+                <select id="editRole">
+                    <option value="user">مستخدم عادي</option>
+                    <option value="accountant">محاسب</option>
+                    <option value="viewer">عارض</option>
+                    <option value="admin">مسؤول</option>
+                </select>
+            </div>
+
+            <button class="btn btn-primary" onclick="saveUserChanges()">حفظ</button>
+            <button class="btn btn-primary" style="background-color: #95a5a6;" onclick="closeEditModal()">إلغاء</button>
+        </div>
+    </div>
+
     <script src="users.js"></script>
 </body>
 </html>

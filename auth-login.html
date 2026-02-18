@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💠 المحاسب العبقري | تسجيل الدخول</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .login-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 450px;
+            padding: 40px;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo-section img {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 15px;
+            animation: spin 2s infinite linear;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .logo-section h1 {
+            font-size: 28px;
+            color: #2f3640;
+            margin-bottom: 5px;
+        }
+
+        .logo-section p {
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2f3640;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s;
+            background-color: #f9f9f9;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            background-color: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-group input::placeholder {
+            color: #bbb;
+        }
+
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 13px;
+        }
+
+        .remember-forgot input[type="checkbox"] {
+            margin-right: 5px;
+            cursor: pointer;
+        }
+
+        .remember-forgot a {
+            color: #667eea;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .remember-forgot a:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 15px;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .login-btn:active {
+            transform: translateY(0);
+        }
+
+        .login-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .alert {
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .alert.success {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+
+        .alert.error {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+
+        .alert.info {
+            background-color: #d1ecf1;
+            border: 1px solid #bee5eb;
+            color: #0c5460;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 10px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #7f8c8d;
+            font-weight: 600;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab-btn.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+            margin-bottom: -2px;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .register-link {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+
+        .register-link a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .register-link a:hover {
+            color: #764ba2;
+        }
+
+        .demo-info {
+            background-color: #d1ecf1;
+            border: 1px solid #bee5eb;
+            color: #0c5460;
+            padding: 12px 15px;
+            border-radius: 8px;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        .spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 3px solid white;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        .loading-text {
+            display: none;
+            text-align: center;
+            color: white;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo-section">
+            <img src="logo.png" alt="Logo" onerror="this.style.display='none'">
+            <h1>💠 المحاسب العبقري</h1>
+            <p>Genius Accountant - نظام محاسبي متكامل</p>
+        </div>
+
+        <div id="alert" class="alert"></div>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('login')">تسجيل الدخول</button>
+            <button class="tab-btn" onclick="switchTab('demo')">بيانات تجريبية</button>
+        </div>
+
+        <!-- تسجيل الدخول -->
+        <div id="login" class="tab-content active">
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">اسم المستخدم</label>
+                    <input type="text" id="username" placeholder="أدخل اسم المستخدم" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">كلمة المرور</label>
+                    <input type="password" id="password" placeholder="أدخل كلمة المرور" required>
+                </div>
+
+                <div class="remember-forgot">
+                    <label>
+                        <input type="checkbox" id="remember"> تذكرني
+                    </label>
+                    <a href="#" onclick="event.preventDefault(); alert('يرجى التواصل مع المسؤول')">هل نسيت كلمة المرور؟</a>
+                </div>
+
+                <button type="submit" class="login-btn" id="loginBtn">
+                    <span>تسجيل الدخول</span>
+                    <div class="spinner"></div>
+                </button>
+
+                <div class="register-link">
+                    لا توجد حساب؟ <a href="#" onclick="event.preventDefault(); alert('يرجى التواصل مع المسؤول لإنشاء حساب')">تواصل مع المسؤول</a>
+                </div>
+            </form>
+        </div>
+
+        <!-- بيانات تجريبية -->
+        <div id="demo" class="tab-content">
+            <div class="demo-info">
+                <strong>بيانات تسجيل الدخول التجريبية:</strong>
+                <hr style="margin: 10px 0;">
+                <div>👤 اسم المستخدم: <strong>admin</strong></div>
+                <div>🔑 كلمة المرور: <strong>admin123</strong></div>
+                <div style="margin-top: 10px; font-size: 12px; color: inherit; opacity: 0.8;">
+                    ملاحظة: هذه بيانات افتراضية يجب تغييرها عند الاستخدام الأول
+                </div>
+            </div>
+
+            <button type="button" class="login-btn" onclick="document.getElementById('username').value='admin'; document.getElementById('password').value='admin123';">
+                ملء البيانات التجريبية
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // تبديل التابات
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            
+            document.getElementById(tab).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // عرض الرسائل
+        function showAlert(message, type = 'info') {
+            const alertEl = document.getElementById('alert');
+            alertEl.textContent = message;
+            alertEl.className = `alert ${type}`;
+            alertEl.style.display = 'block';
+
+            if (type !== 'error') {
+                setTimeout(() => {
+                    alertEl.style.display = 'none';
+                }, 5000);
+            }
+        }
+
+        // تسجيل الدخول
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const loginBtn = document.getElementById('loginBtn');
+            const spinner = loginBtn.querySelector('.spinner');
+
+            if (!username || !password) {
+                showAlert('يرجى ملء جميع الحقول', 'error');
+                return;
+            }
+
+            loginBtn.disabled = true;
+            spinner.style.display = 'block';
+            loginBtn.querySelector('span').textContent = 'جاري التحقق...';
+
+            try {
+                const response = await fetch('/api/users/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.token) {
+                    // حفظ التوكن
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    
+                    if (document.getElementById('remember').checked) {
+                        localStorage.setItem('rememberMe', 'true');
+                        localStorage.setItem('rememberedUsername', username);
+                    }
+
+                    showAlert('✅ تم تسجيل الدخول بنجاح! سيتم التحويل...', 'success');
+                    
+                    setTimeout(() => {
+                        window.location.href = 'dashboard.html';
+                    }, 1500);
+                } else {
+                    showAlert(data.error || 'خطأ في تسجيل الدخول', 'error');
+                }
+            } catch (error) {
+                showAlert('خطأ في الاتصال بالخادم', 'error');
+                console.error('Login error:', error);
+            } finally {
+                loginBtn.disabled = false;
+                spinner.style.display = 'none';
+                loginBtn.querySelector('span').textContent = 'تسجيل الدخول';
+            }
+        });
+
+        // تحميل اسم المستخدم المحفوظ
+        if (localStorage.getItem('rememberMe') === 'true') {
+            document.getElementById('username').value = localStorage.getItem('rememberedUsername') || '';
+            document.getElementById('remember').checked = true;
+        }
+
+        // إعادة التوجيه إذا كان المستخدم مسجل دخول
+        if (localStorage.getItem('token')) {
+            window.location.href = 'dashboard.html';
+        }
+    </script>
+</body>
+</html>
