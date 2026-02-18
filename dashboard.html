@@ -3,28 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <title>💠 المحاسب العبقري | Dashboard</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>💠 المحاسب العبقري | Genius Accountant</h1>
-        <nav>
-            <a href="pages/clients.html">العملاء</a>
-            <a href="pages/invoices.html">الفواتير</a>
-            <a href="pages/debts.html">المديونيات</a>
-            <a href="pages/reports.html">التقارير</a>
-            <a href="index.html">تسجيل الخروج</a>
-        </nav>
-    </header>
-    <main>
-        <h2>لوحة التحكم</h2>
-        <div id="summary">
-            <p>إجمالي العملاء: <span id="totalClients">0</span></p>
-            <p>إجمالي الفواتير: <span id="totalInvoices">0</span></p>
-            <p>إجمالي الإيرادات: <span id="totalRevenue">0</span></p>
-            <p>إجمالي المديونيات: <span id="totalDebts">0</span></p>
-        </div>
-    </main>
+    <div class="dashboard">
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="logo.png" alt="Logo">
+                <h1>💠 المحاسب العبقري</h1>
+            </div>
+            <nav>
+                <a href="dashboard.html">🏠 لوحة التحكم</a>
+                <a href="sales.html">💰 المبيعات</a>
+                <a href="purchases.html">🛒 المشتريات</a>
+                <a href="inventory.html">📦 المخزون</a>
+                <a href="clients.html">👥 العملاء</a>
+                <a href="suppliers.html">🏭 الموردون</a>
+                <a href="accounts.html">📊 الحسابات</a>
+                <a href="reports.html">📈 التقارير</a>
+                <a href="invoice-template.html">📄 تصميم الفواتير</a>
+                <a href="settings.html">⚙️ الإعدادات</a>
+                <a href="users.html">👤 المستخدمون</a>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <header class="top-header">
+                <h2>لوحة التحكم</h2>
+            </header>
+            <div id="summary">
+                <p>👥 إجمالي العملاء: <span id="totalClients">0</span></p>
+                <p>📄 إجمالي الفواتير: <span id="totalInvoices">0</span></p>
+                <p>💰 إجمالي الإيرادات: <span id="totalRevenue">0</span></p>
+                <p>💸 إجمالي المديونيات: <span id="totalDebts">0</span></p>
+            </div>
+            <div id="quickActions">
+                <h3>إجراءات سريعة</h3>
+                <a href="clients.html">إدارة العملاء</a>
+                <a href="invoices.html">إدارة الفواتير</a>
+                <a href="invoice-template.html">تصميم الفواتير</a>
+                <a href="debts.html">إدارة المديونيات</a>
+                <a href="reports.html">عرض التقارير</a>
+            </div>
+        </main>
+    </div>
     <script src="js/dashboard.js"></script>
 </body>
 </html>

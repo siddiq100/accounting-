@@ -1,15 +1,38 @@
 {
-  "name": "genius-accountant",
+  "name": "accounting-app",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/server.js",
+  "bin": "dist/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "dev": "ts-node src/server.ts",
+    "package": "pkg . --targets node18-win-x64 --output accounting-app.exe"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
+  "pkg": {
+    "assets": [
+      "*.html",
+      "*.js",
+      "*.css",
+      "*.png",
+      "logo.png",
+      "accounting.db"
+    ]
+  },
   "dependencies": {
-    "sqlite3": "^5.1.7"
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "reflect-metadata": "^0.1.13",
+    "sqlite3": "^5.1.6",
+    "typeorm": "^0.3.17"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.10.0",
+    "pkg": "^5.8.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.3.3"
   }
 }

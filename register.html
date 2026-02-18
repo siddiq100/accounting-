@@ -10,15 +10,19 @@
         <h1>💠 المحاسب العبقري | Genius Accountant</h1>
     </header>
     <main>
+        <div class="logo">
+            <img src="logo.png" alt="Logo">
+        </div>
         <h2>تسجيل مستخدم جديد</h2>
         <form id="registerForm">
-            <input type="text" id="username" placeholder="اسم المستخدم" required>
-            <input type="password" id="password" placeholder="كلمة المرور" required>
+            <input type="text" id="username" name="username" placeholder="اسم المستخدم" required>
+            <input type="email" id="email" name="email" placeholder="البريد الإلكتروني" required>
+            <input type="password" id="password" name="password" placeholder="كلمة المرور" required>
             <button type="submit">تسجيل</button>
         </form>
         <p>لديك حساب؟ <a href="index.html">تسجيل الدخول</a></p>
-        <div id="registerMessage"></div>
+        <div id="registerError"></div>
     </main>
-    <script src="js/main.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

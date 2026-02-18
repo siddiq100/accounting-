@@ -1,54 +1,99 @@
-const sqlite3 = require('sqlite3').verbose();
-const db = new sqlite3.Database('./database.db');
-
-function loadClientsToSelect() {
-    db.all("SELECT * FROM clients", (err, rows) => {
+async function loadClientsToSelect() {
+    try {
+        const response = await fetch('/api/clients');
+        const clients = await response.json();
         const select = document.getElementById('clientSelect');
         select.innerHTML = '<option value="">اختر العميل</option>';
-        rows.forEach(row => {
+        clients.forEach(client => {
             const option = document.createElement('option');
-            option.value = row.id;
-            option.text = row.name;
+            option.value = client.id;
+            option.text = client.name;
             select.appendChild(option);
         });
-    });
+    } catch (error) {
+        console.error('خطأ في جلب العملاء:', error);
+    }
 }
 
-function loadDebts() {
-    db.all(`SELECT debts.id, clients.name AS clientName, debts.amount, debts.description
-            FROM debts
-            LEFT JOIN clients ON debts.client_id = clients.id`, (err, rows) => {
+async function loadDebts() {
+    try {
+        const response = await fetch('/api/debts');
+        const debts = await response.json();
         const tbody = document.querySelector('#debtsTable tbody');
         tbody.innerHTML = '';
         let total = 0;
-        rows.forEach(row => {
-            total += row.amount;
+        debts.forEach(debt => {
+            total += debt.amount;
             const tr = document.createElement('tr');
-            tr.innerHTML = `<td>${row.id}</td>
-                            <td>${row.clientName}</td>
-                            <td>${row.amount}</td>
-                            <td>${row.description}</td>`;
+            tr.innerHTML = `<td>${debt.id}</td>
+                            <td>${debt.client_name}</td>
+                            <td>${debt.amount}</td>
+                            <td>${debt.description}</td>
+                            <td>
+                                <button onclick="editDebt(${debt.id})">تحرير</button>
+                                <button onclick="deleteDebt(${debt.id})">حذف</button>
+                            </td>`;
             tbody.appendChild(tr);
         });
         document.getElementById('totalDebts').innerText = total;
-    });
+    } catch (error) {
+        console.error('خطأ في جلب المديونيات:', error);
+    }
 }
 
-document.getElementById('addDebtForm').addEventListener('submit', function(e) {
+document.getElementById('addDebtForm').addEventListener('submit', async function(e) {
     e.preventDefault();
     const clientId = document.getElementById('clientSelect').value;
     const amount = parseFloat(document.getElementById('debtAmount').value);
     const description = document.getElementById('debtDescription').value;
 
-    const stmt = db.prepare("INSERT INTO debts (client_id, amount, description) VALUES (?, ?, ?)");
-    stmt.run(clientId, amount, description, function(err) {
-        if (!err) {
+    try {
+        const response = await fetch('/api/debts', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ clientId, amount, description })
+        });
+        if (response.ok) {
             loadDebts();
             this.reset();
         }
-    });
-    stmt.finalize();
+    } catch (error) {
+        console.error('خطأ في إضافة المديونية:', error);
+    }
 });
 
 loadClientsToSelect();
 loadDebts();
+
+async function editDebt(id) {
+    const newAmount = prompt('أدخل المبلغ الجديد:');
+    if (newAmount) {
+        try {
+            const response = await fetch(`/api/debts/${id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ amount: parseFloat(newAmount) })
+            });
+            if (response.ok) {
+                loadDebts();
+            }
+        } catch (error) {
+            console.error('خطأ في تحرير المديونية:', error);
+        }
+    }
+}
+
+async function deleteDebt(id) {
+    if (confirm('هل أنت متأكد من حذف هذه المديونية؟')) {
+        try {
+            const response = await fetch(`/api/debts/${id}`, {
+                method: 'DELETE'
+            });
+            if (response.ok) {
+                loadDebts();
+            }
+        } catch (error) {
+            console.error('خطأ في حذف المديونية:', error);
+        }
+    }
+}

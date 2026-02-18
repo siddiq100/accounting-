@@ -1,21 +1,16 @@
-const sqlite3 = require('sqlite3').verbose();
-const db = new sqlite3.Database('./database.db');
-
-function loadReports() {
-    db.get("SELECT COUNT(*) AS count FROM clients", (err, row) => {
-        document.getElementById('totalClients').innerText = row.count;
-    });
-
-    db.get("SELECT COUNT(*) AS count, SUM(total) AS revenue, SUM(paid) AS paid FROM invoices", (err, row) => {
-        document.getElementById('totalInvoices').innerText = row.count;
-        document.getElementById('totalRevenue').innerText = row.revenue || 0;
-        document.getElementById('totalPaid').innerText = row.paid || 0;
-        document.getElementById('remainingRevenue').innerText = (row.revenue || 0) - (row.paid || 0);
-    });
-
-    db.get("SELECT SUM(amount) AS debts FROM debts", (err, row) => {
-        document.getElementById('totalDebts').innerText = row.debts || 0;
-    });
+async function loadReports() {
+    try {
+        const response = await fetch('/api/reports');
+        const data = await response.json();
+        document.getElementById('totalClients').innerText = data.totalClients;
+        document.getElementById('totalInvoices').innerText = data.totalInvoices;
+        document.getElementById('totalRevenue').innerText = data.totalRevenue;
+        document.getElementById('totalPaid').innerText = data.totalRevenue - data.unpaidInvoices; // افتراضي
+        document.getElementById('remainingRevenue').innerText = data.unpaidInvoices;
+        document.getElementById('totalDebts').innerText = data.totalDebts;
+    } catch (error) {
+        console.error('خطأ في جلب التقارير:', error);
+    }
 }
 
 loadReports();

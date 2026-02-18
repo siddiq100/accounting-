@@ -1,0 +1,58 @@
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+database/
+accounting.db
+database.db
+
+# Build
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-workspace
+.DS_Store
+
+# Environment Variables
+.env
+.env.local
+.env.*.local
+
+# Uploads
+uploads/
+temp/
+tmp/
+
+# Compiled files
+*.exe
+*.o
+*.obj
+*.dll
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# OS Files
+Thumbs.db
+.DS_Store
+
+# Testing
+coverage/
+.nyc_output/
+
+# Misc
+.step.SED
+*.txt~
+New Text Document.txt

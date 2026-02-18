@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>💠 المحاسب العبقري | الإعدادات</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard">
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="logo.png" alt="Logo">
+                <h1>💠 المحاسب العبقري</h1>
+            </div>
+            <nav>
+                <a href="dashboard.html">🏠 لوحة التحكم</a>
+                <a href="sales.html">💰 المبيعات</a>
+                <a href="purchases.html">🛒 المشتريات</a>
+                <a href="inventory.html">📦 المخزون</a>
+                <a href="clients.html">👥 العملاء</a>
+                <a href="suppliers.html">🏭 الموردون</a>
+                <a href="accounts.html">📊 الحسابات</a>
+                <a href="reports.html">📈 التقارير</a>
+                <a href="settings.html">⚙️ الإعدادات</a>
+                <a href="users.html">👤 المستخدمون</a>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <header class="top-header">
+                <h2>إعدادات الشركة</h2>
+            </header>
+            
+            <div class="settings-container">
+                <form id="companySettingsForm" enctype="multipart/form-data">
+                    <div class="settings-section">
+                        <h3>معلومات الشركة الأساسية</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="company_name">اسم الشركة:</label>
+                                <input type="text" id="company_name" name="company_name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="company_phone">رقم الهاتف:</label>
+                                <input type="text" id="company_phone" name="company_phone">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="company_email">البريد الإلكتروني:</label>
+                                <input type="email" id="company_email" name="company_email">
+                            </div>
+                            <div class="form-group">
+                                <label for="tax_number">رقم الضريبة:</label>
+                                <input type="text" id="tax_number" name="tax_number">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="company_address">عنوان الشركة:</label>
+                            <textarea id="company_address" name="company_address" rows="3"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-section">
+                        <h3>شعار الشركة</h3>
+                        <div class="logo-upload">
+                            <div class="current-logo">
+                                <img id="currentLogo" src="logo.png" alt="الشعار الحالي" style="max-width: 150px; max-height: 150px; border: 2px solid #ddd; border-radius: 10px;">
+                            </div>
+                            <div class="logo-input">
+                                <label for="logo">اختر شعار جديد:</label>
+                                <input type="file" id="logo" name="logo" accept="image/*" onchange="previewLogo(this)">
+                                <p class="help-text">الملفات المسموحة: JPG, PNG, GIF (حجم أقصى: 2MB)</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-section">
+                        <h3>سياسات الشركة</h3>
+                        <div class="form-group">
+                            <label for="payment_terms">شروط الدفع:</label>
+                            <textarea id="payment_terms" name="payment_terms" rows="3"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="return_policy">سياسة المرتجع:</label>
+                            <textarea id="return_policy" name="return_policy" rows="3"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="save-btn">💾 حفظ الإعدادات</button>
+                        <button type="button" onclick="resetSettings()" class="reset-btn">🔄 إعادة تعيين</button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+    <script src="settings.js"></script>
+</body>
+</html>

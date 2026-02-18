@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>💠 المحاسب العبقري | المخزون</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard">
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="logo.png" alt="Logo">
+                <h1>💠 المحاسب العبقري</h1>
+            </div>
+            <nav>
+                <a href="dashboard.html">🏠 لوحة التحكم</a>
+                <a href="sales.html">💰 المبيعات</a>
+                <a href="purchases.html">🛒 المشتريات</a>
+                <a href="inventory.html">📦 المخزون</a>
+                <a href="clients.html">👥 العملاء</a>
+                <a href="suppliers.html">🏭 الموردون</a>
+                <a href="accounts.html">📊 الحسابات</a>
+                <a href="reports.html">📈 التقارير</a>
+                <a href="settings.html">⚙️ الإعدادات</a>
+                <a href="users.html">👤 المستخدمون</a>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <header class="top-header">
+                <h2>إدارة المخزون</h2>
+            </header>
+            
+            <div class="inventory-tabs">
+                <button onclick="showTab('items')" class="tab-btn active">📦 الأصناف</button>
+                <button onclick="showTab('count')" class="tab-btn">🔢 الجرد</button>
+                <button onclick="showTab('adjustment')" class="tab-btn">⚖️ التسويات</button>
+                <button onclick="showTab('reports')" class="tab-btn">📊 التقارير</button>
+            </div>
+            
+            <div id="itemsTab" class="tab-content active">
+                <div class="inventory-header">
+                    <h3>إدارة الأصناف</h3>
+                    <div class="inventory-actions">
+                        <input type="text" id="searchItems" placeholder="البحث في الأصناف..." onkeyup="filterItems()">
+                        <select id="categoryFilter" onchange="filterItems()">
+                            <option value="">جميع الفئات</option>
+                        </select>
+                        <button onclick="showAddItemModal()" class="add-btn">➕ إضافة صنف</button>
+                    </div>
+                </div>
+                
+                <div class="inventory-stats">
+                    <div class="stat-card">
+                        <h4>إجمالي الأصناف</h4>
+                        <span id="totalItems">0</span>
+                    </div>
+                    <div class="stat-card">
+                        <h4>قيمة المخزون</h4>
+                        <span id="totalValue">0.00 ريال</span>
+                    </div>
+                    <div class="stat-card low-stock">
+                        <h4>أصناف منخفضة المخزون</h4>
+                        <span id="lowStockItems">0</span>
+                    </div>
+                </div>
+                
+                <table id="itemsTable" class="inventory-table">
+                    <thead>
+                        <tr>
+                            <th>كود الصنف</th>
+                            <th>اسم الصنف</th>
+                            <th>الفئة</th>
+                            <th>الكمية</th>
+                            <th>الحد الأدنى</th>
+                            <th>سعر الشراء</th>
+                            <th>سعر البيع</th>
+                            <th>الحالة</th>
+                            <th>الإجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody id="itemsTableBody"></tbody>
+                </table>
+            </div>
+            
+            <div id="countTab" class="tab-content">
+                <div class="inventory-header">
+                    <h3>إدارة الجرد</h3>
+                    <button onclick="showNewCountModal()" class="add-btn">🔢 جرد جديد</button>
+                </div>
+                
+                <table id="countsTable" class="inventory-table">
+                    <thead>
+                        <tr>
+                            <th>رقم الجرد</th>
+                            <th>تاريخ الجرد</th>
+                            <th>الحالة</th>
+                            <th>المسؤول</th>
+                            <th>الإجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody id="countsTableBody"></tbody>
+                </table>
+            </div>
+            
+            <div id="adjustmentTab" class="tab-content">
+                <div class="inventory-header">
+                    <h3>إدارة التسويات</h3>
+                    <button onclick="showNewAdjustmentModal()" class="add-btn">⚖️ تسوية جديدة</button>
+                </div>
+                
+                <table id="adjustmentsTable" class="inventory-table">
+                    <thead>
+                        <tr>
+                            <th>رقم التسوية</th>
+                            <th>تاريخ التسوية</th>
+                            <th>السبب</th>
+                            <th>الحالة</th>
+                            <th>المسؤول</th>
+                            <th>الإجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adjustmentsTableBody"></tbody>
+                </table>
+            </div>
+            
+            <div id="reportsTab" class="tab-content">
+                <div class="inventory-header">
+                    <h3>تقارير المخزون</h3>
+                </div>
+                
+                <div class="reports-grid">
+                    <div class="report-card" onclick="showLowStockReport()">
+                        <h4>📉 الأصناف منخفضة المخزون</h4>
+                        <p>عرض الأصناف التي تحتاج لإعادة تخزين</p>
+                    </div>
+                    
+                    <div class="report-card" onclick="showMovementReport()">
+                        <h4>📈 حركة المخزون</h4>
+                        <p>عرض حركة الأصناف خلال فترة زمنية</p>
+                    </div>
+                    
+                    <div class="report-card" onclick="showValueReport()">
+                        <h4>💰 قيمة المخزون</h4>
+                        <p>عرض القيمة الإجمالية للمخزون</p>
+                    </div>
+                </div>
+                
+                <div id="reportContent" class="report-content" style="display: none;"></div>
+            </div>
+        </main>
+        
+        <!-- Modal لإضافة/تحرير صنف -->
+        <div id="itemModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="itemModalTitle">إضافة صنف جديد</h3>
+                    <span class="close" onclick="closeModal()">&times;</span>
+                </div>
+                <form id="itemForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="item_code">كود الصنف:</label>
+                            <input type="text" id="item_code" name="item_code" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="item_name">اسم الصنف:</label>
+                            <input type="text" id="item_name" name="item_name" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="category">الفئة:</label>
+                            <input type="text" id="category" name="category">
+                        </div>
+                        <div class="form-group">
+                            <label for="unit">الوحدة:</label>
+                            <input type="text" id="unit" name="unit" value="قطعة">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="quantity">الكمية الحالية:</label>
+                            <input type="number" id="quantity" name="quantity" min="0" step="0.01">
+                        </div>
+                        <div class="form-group">
+                            <label for="min_quantity">الحد الأدنى:</label>
+                            <input type="number" id="min_quantity" name="min_quantity" min="0" step="0.01">
+                        </div>
+                        <div class="form-group">
+                            <label for="max_quantity">الحد الأقصى:</label>
+                            <input type="number" id="max_quantity" name="max_quantity" min="0" step="0.01">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="cost_price">سعر الشراء:</label>
+                            <input type="number" id="cost_price" name="cost_price" min="0" step="0.01">
+                        </div>
+                        <div class="form-group">
+                            <label for="selling_price">سعر البيع:</label>
+                            <input type="number" id="selling_price" name="selling_price" min="0" step="0.01">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="supplier_id">المورد:</label>
+                            <select id="supplier_id" name="supplier_id">
+                                <option value="">اختر المورد</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="location">الموقع:</label>
+                            <input type="text" id="location" name="location">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="description">الوصف:</label>
+                        <textarea id="description" name="description" rows="3"></textarea>
+                    </div>
+                    
+                    <div class="modal-actions">
+                        <button type="submit" class="save-btn">💾 حفظ</button>
+                        <button type="button" onclick="closeModal()" class="cancel-btn">❌ إلغاء</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="inventory.js"></script>
+</body>
+</html>

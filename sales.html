@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>💠 المحاسب العبقري | المبيعات</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard">
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="logo.png" alt="Logo">
+                <h1>💠 المحاسب العبقري</h1>
+            </div>
+            <nav>
+                <a href="dashboard.html">🏠 لوحة التحكم</a>
+                <a href="sales.html">💰 المبيعات</a>
+                <a href="purchases.html">🛒 المشتريات</a>
+                <a href="inventory.html">📦 المخزون</a>
+                <a href="clients.html">👥 العملاء</a>
+                <a href="suppliers.html">🏭 الموردون</a>
+                <a href="accounts.html">📊 الحسابات</a>
+                <a href="reports.html">📈 التقارير</a>
+                <a href="settings.html">⚙️ الإعدادات</a>
+                <a href="users.html">👤 المستخدمون</a>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <header class="top-header">
+                <h2>إدارة المبيعات</h2>
+            </header>
+            <div class="sales-options">
+                <button onclick="showInvoice('sales')">📄 فاتورة مبيعات</button>
+                <button onclick="showInvoice('return')">🔄 فاتورة مرتجع</button>
+            </div>
+            <div id="invoiceContainer" style="display: none;">
+                <!-- الفاتورة ستظهر هنا -->
+            </div>
+        </main>
+    </div>
+    <script src="sales.js"></script>
+</body>
+</html>

@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>💠 المحاسب العبقري | تصميم الفواتير</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .template-container {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+        }
+        .design-panel {
+            flex: 1;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .preview-panel {
+            flex: 1;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #2f3640;
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #dfe6e9;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        .color-picker {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .color-option {
+            width: 40px;
+            height: 40px;
+            border-radius: 5px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+        .color-option.active {
+            border-color: #000;
+        }
+        .preview {
+            border: 1px solid #dfe6e9;
+            border-radius: 5px;
+            padding: 20px;
+            background: white;
+            page-break-after: always;
+        }
+        .invoice-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #dfe6e9;
+            padding-bottom: 15px;
+        }
+        .company-info {
+            flex: 1;
+        }
+        .company-name {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .invoice-details {
+            text-align: left;
+            flex: 1;
+        }
+        .invoice-details h3 {
+            margin: 0;
+            font-size: 14px;
+        }
+        .invoice-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .invoice-table th {
+            background-color: #667eea;
+            color: white;
+            padding: 10px;
+            text-align: right;
+        }
+        .invoice-table td {
+            padding: 10px;
+            border-bottom: 1px solid #dfe6e9;
+        }
+        .invoice-totals {
+            text-align: left;
+            margin-top: 20px;
+        }
+        .total-row {
+            display: flex;
+            justify-content: flex-end;
+            margin: 5px 0;
+            gap: 20px;
+        }
+        .total-label {
+            font-weight: bold;
+            min-width: 100px;
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        .btn-primary {
+            background-color: #667eea;
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: #5568d3;
+        }
+        .btn-secondary {
+            background-color: #f0f0f0;
+            color: #2f3640;
+        }
+        .btn-secondary:hover {
+            background-color: #e0e0e0;
+        }
+        .section-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            color: #667eea;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 5px;
+        }
+        .template-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #dfe6e9;
+        }
+        .template-tab {
+            padding: 10px 15px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            color: #666;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+        .template-tab.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="logo.png" alt="Logo">
+                <h1>💠 المحاسب العبقري</h1>
+            </div>
+            <nav>
+                <a href="dashboard.html">🏠 لوحة التحكم</a>
+                <a href="sales.html">💰 المبيعات</a>
+                <a href="purchases.html">🛒 المشتريات</a>
+                <a href="inventory.html">📦 المخزون</a>
+                <a href="clients.html">👥 العملاء</a>
+                <a href="suppliers.html">🏭 الموردون</a>
+                <a href="accounts.html">📊 الحسابات</a>
+                <a href="reports.html">📈 التقارير</a>
+                <a href="invoice-template.html" style="background-color: rgba(255,255,255,0.3);">📄 تصميم الفواتير</a>
+                <a href="settings.html">⚙️ الإعدادات</a>
+            </nav>
+        </aside>
+        
+        <main class="main-content">
+            <header class="top-header">
+                <h2>📄 تصميم الفواتير والسندات</h2>
+            </header>
+            
+            <div class="template-tabs">
+                <button class="template-tab active" onclick="switchTemplate('invoice')">🧾 فاتورة بيع</button>
+                <button class="template-tab" onclick="switchTemplate('receipt')">🧮 سند استقبال</button>
+                <button class="template-tab" onclick="switchTemplate('purchase')">📋 فاتورة شراء</button>
+            </div>
+            
+            <div class="template-container">
+                <!-- لوحة التصميم -->
+                <div class="design-panel">
+                    <div class="section-title">معلومات الشركة</div>
+                    <div class="form-group">
+                        <label>اسم الشركة</label>
+                        <input type="text" id="companyName" placeholder="اسم الشركة" value="المحاسب العبقري">
+                    </div>
+                    <div class="form-group">
+                        <label>عنوان الشركة</label>
+                        <textarea id="companyAddress" placeholder="عنوان الشركة">الرياض - المملكة العربية السعودية</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>رقم الهاتف</label>
+                        <input type="tel" id="companyPhone" placeholder="رقم الهاتف" value="+966 55 0000000">
+                    </div>
+                    <div class="form-group">
+                        <label>البريد الإلكتروني</label>
+                        <input type="email" id="companyEmail" placeholder="البريد الإلكتروني" value="info@genius.sa">
+                    </div>
+                    
+                    <div class="section-title">التنسيق والألوان</div>
+                    <div class="form-group">
+                        <label>لون الرأس</label>
+                        <div class="color-picker">
+                            <div class="color-option active" style="background-color: #667eea;" onclick="selectColor('#667eea')"></div>
+                            <div class="color-option" style="background-color: #0652DD;" onclick="selectColor('#0652DD')"></div>
+                            <div class="color-option" style="background-color: #00A8E8;" onclick="selectColor('#00A8E8')"></div>
+                            <div class="color-option" style="background-color: #2ED573;" onclick="selectColor('#2ED573')"></div>
+                            <div class="color-option" style="background-color: #FF6348;" onclick="selectColor('#FF6348')"></div>
+                            <div class="color-option" style="background-color: #1e90ff;" onclick="selectColor('#1e90ff')"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>عرض رقم الفاتورة</label>
+                        <select id="showInvoiceNumber">
+                            <option value="true">نعم</option>
+                            <option value="false">لا</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>عرض التاريخ</label>
+                        <select id="showDate">
+                            <option value="true">نعم</option>
+                            <option value="false">لا</option>
+                        </select>
+                    </div>
+                    
+                    <div class="section-title">البيانات الإضافية</div>
+                    <div class="form-group">
+                        <label>الشروط والأحكام</label>
+                        <textarea id="termsConditions" placeholder="الشروط والأحكام">شكراً لتعاملكم معنا</textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>توقيع</label>
+                        <input type="text" id="signature" placeholder="التوقيع" value="ختم الشركة">
+                    </div>
+                    
+                    <div class="button-group">
+                        <button class="btn-primary" onclick="printPreview()">🖨️ طباعة</button>
+                        <button class="btn-secondary" onclick="saveTemplate()">💾 حفظ التصميم</button>
+                        <button class="btn-secondary" onclick="resetTemplate()">🔄 إعادة تعيين</button>
+                    </div>
+                </div>
+                
+                <!-- لوحة المعاينة -->
+                <div class="preview-panel">
+                    <div class="preview" id="invoicePreview">
+                        <div class="invoice-header">
+                            <div class="company-info">
+                                <div class="company-name" id="previewCompanyName">المحاسب العبقري</div>
+                                <div style="font-size: 12px; color: #666;">
+                                    <div id="previewAddress">الرياض - المملكة العربية السعودية</div>
+                                    <div id="previewPhone">+966 55 0000000</div>
+                                    <div id="previewEmail">info@genius.sa</div>
+                                </div>
+                            </div>
+                            <div class="invoice-details">
+                                <h3 id="invoiceTypeHeader">فاتورة بيع</h3>
+                                <h3 style="display: none;" id="invoiceNumberDisplay">الرقم: #001</h3>
+                                <h3 style="display: none;" id="invoiceDateDisplay">التاريخ: <span id="currentDate"></span></h3>
+                            </div>
+                        </div>
+                        
+                        <table class="invoice-table">
+                            <thead>
+                                <tr>
+                                    <th>البيان</th>
+                                    <th>الكمية</th>
+                                    <th>السعر</th>
+                                    <th>الإجمالي</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>منتج عينة 1</td>
+                                    <td>2</td>
+                                    <td>100</td>
+                                    <td>200</td>
+                                </tr>
+                                <tr>
+                                    <td>منتج عينة 2</td>
+                                    <td>1</td>
+                                    <td>150</td>
+                                    <td>150</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <div class="invoice-totals">
+                            <div class="total-row">
+                                <span class="total-label">الإجمالي:</span>
+                                <span>350</span>
+                            </div>
+                            <div class="total-row">
+                                <span class="total-label">الضريبة:</span>
+                                <span>52.5</span>
+                            </div>
+                            <div class="total-row" style="border-top: 2px solid #667eea; padding-top: 10px;">
+                                <span class="total-label" style="font-size: 16px;">المجموع النهائي:</span>
+                                <span style="font-size: 16px; font-weight: bold;">402.5</span>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 30px; text-align: center; font-size: 12px; color: #666;">
+                            <div id="previewTerms">شكراً لتعاملكم معنا</div>
+                            <div id="previewSignature" style="margin-top: 20px;">ختم الشركة</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script>
+        // حفظ التصميم الحالي
+        let currentTemplate = 'invoice';
+        let headerColor = '#667eea';
+
+        // دالة تبديل نوع الفاتورة
+        function switchTemplate(type) {
+            currentTemplate = type;
+            
+            // تحديث الأزرار النشطة
+            document.querySelectorAll('.template-tab').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // تحديث رأس الفاتورة
+            const typeLabels = {
+                'invoice': 'فاتورة بيع',
+                'receipt': 'سند استقبال',
+                'purchase': 'فاتورة شراء'
+            };
+            
+            document.getElementById('invoiceTypeHeader').textContent = typeLabels[type];
+            updatePreview();
+        }
+
+        // دالة اختيار اللون
+        function selectColor(color) {
+            headerColor = color;
+            
+            // تحديث الأزرار النشطة
+            document.querySelectorAll('.color-option').forEach(opt => {
+                opt.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            updatePreview();
+        }
+
+        // تحديث المعاينة
+        function updatePreview() {
+            // تحديث معلومات الشركة
+            document.getElementById('previewCompanyName').textContent = 
+                document.getElementById('companyName').value || 'المحاسب العبقري';
+            document.getElementById('previewAddress').textContent = 
+                document.getElementById('companyAddress').value || 'الرياض - المملكة العربية السعودية';
+            document.getElementById('previewPhone').textContent = 
+                document.getElementById('companyPhone').value || '+966 55 0000000';
+            document.getElementById('previewEmail').textContent = 
+                document.getElementById('companyEmail').value || 'info@genius.sa';
+            
+            // تحديث البيانات الإضافية
+            document.getElementById('previewTerms').textContent = 
+                document.getElementById('termsConditions').value || 'شكراً لتعاملكم معنا';
+            document.getElementById('previewSignature').textContent = 
+                document.getElementById('signature').value || 'ختم الشركة';
+            
+            // تحديث الرؤية
+            const invoiceNumberDisplay = document.getElementById('invoiceNumberDisplay');
+            const invoiceDateDisplay = document.getElementById('invoiceDateDisplay');
+            
+            invoiceNumberDisplay.style.display = document.getElementById('showInvoiceNumber').value === 'true' ? 'block' : 'none';
+            invoiceDateDisplay.style.display = document.getElementById('showDate').value === 'true' ? 'block' : 'none';
+            
+            // تحديث التاريخ
+            const today = new Date();
+            const hijriDate = convertToHijri(today);
+            document.getElementById('currentDate').textContent = hijriDate;
+            
+            // تحديث اللون
+            const preview = document.getElementById('invoicePreview');
+            const tables = preview.querySelectorAll('th');
+            tables.forEach(th => {
+                th.style.backgroundColor = headerColor;
+            });
+        }
+
+        // دالة تحويل التاريخ إلى هجري (توافق أساسي)
+        function convertToHijri(date) {
+            const hijriYear = Math.floor(date.getFullYear() - 622 + (date.getMonth() - 1) / 12);
+            const hijriMonth = date.getMonth() + 1;
+            const hijriDay = date.getDate();
+            return `${hijriDay}/${hijriMonth}/${hijriYear}`;
+        }
+
+        // دالة طباعة المعاينة
+        function printPreview() {
+            const preview = document.getElementById('invoicePreview').innerHTML;
+            const printWindow = window.open('', '', 'height=600,width=800');
+            printWindow.document.write(`
+                <!DOCTYPE html>
+                <html lang="ar" dir="rtl">
+                <head>
+                    <meta charset="UTF-8">
+                    <title>طباعة الفاتورة</title>
+                    <style>
+                        * {
+                            margin: 0;
+                            padding: 0;
+                            box-sizing: border-box;
+                        }
+                        body {
+                            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                            padding: 20px;
+                        }
+                        .preview {
+                            page-break-after: always;
+                        }
+                        @media print {
+                            body {
+                                margin: 0;
+                                padding: 0;
+                            }
+                        }
+                    </style>
+                </head>
+                <body>
+                    ${preview}
+                </body>
+                </html>
+            `);
+            printWindow.document.close();
+            setTimeout(() => printWindow.print(), 250);
+        }
+
+        // دالة حفظ التصميم
+        function saveTemplate() {
+            const template = {
+                companyName: document.getElementById('companyName').value,
+                companyAddress: document.getElementById('companyAddress').value,
+                companyPhone: document.getElementById('companyPhone').value,
+                companyEmail: document.getElementById('companyEmail').value,
+                headerColor: headerColor,
+                showInvoiceNumber: document.getElementById('showInvoiceNumber').value,
+                showDate: document.getElementById('showDate').value,
+                termsConditions: document.getElementById('termsConditions').value,
+                signature: document.getElementById('signature').value,
+                templateType: currentTemplate
+            };
+            
+            localStorage.setItem('invoiceTemplate_' + currentTemplate, JSON.stringify(template));
+            alert('✅ تم حفظ التصميم بنجاح!');
+        }
+
+        // دالة استعادة التصميم المحفوظ
+        function loadTemplate() {
+            const savedTemplate = localStorage.getItem('invoiceTemplate_' + currentTemplate);
+            if (savedTemplate) {
+                const template = JSON.parse(savedTemplate);
+                document.getElementById('companyName').value = template.companyName;
+                document.getElementById('companyAddress').value = template.companyAddress;
+                document.getElementById('companyPhone').value = template.companyPhone;
+                document.getElementById('companyEmail').value = template.companyEmail;
+                document.getElementById('showInvoiceNumber').value = template.showInvoiceNumber;
+                document.getElementById('showDate').value = template.showDate;
+                document.getElementById('termsConditions').value = template.termsConditions;
+                document.getElementById('signature').value = template.signature;
+                headerColor = template.headerColor;
+                updatePreview();
+            }
+        }
+
+        // دالة إعادة تعيين
+        function resetTemplate() {
+            if (confirm('هل أنت متأكد من رغبتك في إعادة تعيين التصميم؟')) {
+                document.getElementById('companyName').value = 'المحاسب العبقري';
+                document.getElementById('companyAddress').value = 'الرياض - المملكة العربية السعودية';
+                document.getElementById('companyPhone').value = '+966 55 0000000';
+                document.getElementById('companyEmail').value = 'info@genius.sa';
+                document.getElementById('showInvoiceNumber').value = 'true';
+                document.getElementById('showDate').value = 'true';
+                document.getElementById('termsConditions').value = 'شكراً لتعاملكم معنا';
+                document.getElementById('signature').value = 'ختم الشركة';
+                headerColor = '#667eea';
+                updatePreview();
+            }
+        }
+
+        // إضافة مستمعي الأحداث
+        document.addEventListener('DOMContentLoaded', function() {
+            // تحديث المعاينة عند تغيير المدخلات
+            const inputs = document.querySelectorAll(
+                '#companyName, #companyAddress, #companyPhone, #companyEmail, ' +
+                '#showInvoiceNumber, #showDate, #termsConditions, #signature'
+            );
+            
+            inputs.forEach(input => {
+                input.addEventListener('input', updatePreview);
+                input.addEventListener('change', updatePreview);
+            });
+            
+            // تحميل التصميم المحفوظ
+            loadTemplate();
+            
+            // تحديث المعاينة الأولية
+            updatePreview();
+        });
+
+        // دالة تصدير الفاتورة كـ PDF
+        function exportAsPDF() {
+            const preview = document.getElementById('invoicePreview').innerHTML;
+            const element = document.createElement('div');
+            element.innerHTML = preview;
+            
+            // يمكن استخدام مكتبة html2pdf عند إضافتها
+            alert('هذه الميزة ستتطلب مكتبة html2pdf للتصدير');
+            printPreview();
+        }
+    </script>
+</body>
+</html>
